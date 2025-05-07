@@ -6,13 +6,13 @@ RUN apt-get update && apt-get -o APT::Immediate-Configure=0 install -y \
       python3-dev python3-pip openjdk-17-jdk unzip sed wget \
     && rm -rf /var/lib/apt/lists/*
 
-# install ghidra 10.4 and patch the launch script to work in containers
+# install ghidra_11.3.2 and patch the launch script to work in containers
 RUN mkdir tools && mkdir /root/ghidra_scripts/
 ENV PATH "/tools/:$PATH"
 WORKDIR tools
-RUN wget https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip && \
-    unzip ghidra_10.4_PUBLIC_20230928.zip && \
-    sed -i 's/java -cp/java -Djdk.lang.Process.launchMechanism=vfork -cp/g' /tools/ghidra_10.4_PUBLIC/support/launch.sh
+RUN wget https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_11.3.2_build/ghidra_11.3.2_PUBLIC_20250415.zip && \
+    unzip ghidra_11.3.2_PUBLIC_20250415.zip && \
+    sed -i 's/java -cp/java -Djdk.lang.Process.launchMechanism=vfork -cp/g' /tools/ghidra_11.3.2_PUBLIC/support/launch.sh
 
 # copy the local pip project, install it, its plugins, and the models
 workdir /
